@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="零零发">
 <meta property="og:description" content="策略模式Strategy—-行为型模式用来解决解决执行流程固定 策略不同的问题  内部类指的是java中可以将一个类定义在另一个类的内部">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-25T16:55:59.582Z">
+<meta property="og:updated_time" content="2019-11-25T17:50:54.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="策略模式+内部类">
 <meta name="twitter:description" content="策略模式Strategy—-行为型模式用来解决解决执行流程固定 策略不同的问题  内部类指的是java中可以将一个类定义在另一个类的内部">
@@ -341,17 +341,20 @@
       
 
       
-        <h4 id="策略模式Strategy—-行为型模式"><a href="#策略模式Strategy—-行为型模式" class="headerlink" title="策略模式Strategy—-行为型模式"></a>策略模式Strategy—-行为型模式</h4><p>用来解决解决执行流程固定 策略不同的问题</p>
+        <h2 id="策略模式Strategy—-行为型模式"><a href="#策略模式Strategy—-行为型模式" class="headerlink" title="策略模式Strategy—-行为型模式"></a>策略模式Strategy—-行为型模式</h2><p>用来解决解决执行流程固定 策略不同的问题</p>
 <hr>
-<h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><p>指的是java中可以将一个类定义在另一个类的内部</p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>指的是java中可以将一个类定义在另一个类的内部</p>
 <a id="more"></a>
 
 <ol>
+<li><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3></li>
 <li><p>内部类可以定义在<strong>类的内部</strong>（与类成员层次一致）</p>
 </li>
 <li><p>内部类可以定义在<strong>方法/块内部</strong>（与类成员相差一个层次，相当于跟方法的局部变量一个层次）</p>
 </li>
-<li><p>成员内部类<br> 将一个类直接定义在类的里面，作为成员，与属性    或方法层次一致<br> <strong>成员内部类</strong>可以使用<strong>不同权限修饰符</strong>（不像正常类只有<strong>public</strong>跟<strong>无</strong>）<br>内部类存在时，源代码编译会产生一个字节码 Demo$InnerDemo.class（中间有$）</p>
+</ol>
+<ol>
+<li><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><p>将一个类直接定义在类的里面，作为成员，与属性    或方法层次一致<br><strong>成员内部类</strong>可以使用<strong>不同权限修饰符</strong>（不像正常类只有<strong>public</strong>跟<strong>无</strong>）<br>内部类存在时，源代码编译会产生一个字节码 Demo$InnerDemo.class（中间有$）</p>
 <p>好处：</p>
 <ol>
 <li>可以省略一个.Java文件</li>
@@ -365,7 +368,7 @@
 </li>
 </ol>
 <ol start="2">
-<li><p>局部内部类（不常用）<br>将一个类<strong>定义在方法/块</strong>里面，作为成员的内部结构，与临时的局部变量一个层次<br>会像一个局部的变量一样，不能用public protected private以及static<br>只能用abstract或final<br>局部内部类命名规则 Demo$1InnerMethod Demo$2InnerMethod (用数字区分两个重名的)<br>局部内部类使用的变量只能是final修饰的，java8默认自带final <a href="https://juejin.im/post/5bc5f8bae51d450e482c445d" target="_blank" rel="noopener">深入理解局部内部类访问局部变量为什么必须加final关键字</a></p>
+<li><h3 id="局部内部类（不常用）"><a href="#局部内部类（不常用）" class="headerlink" title="局部内部类（不常用）"></a>局部内部类（不常用）</h3><p>将一个类<strong>定义在方法/块</strong>里面，作为成员的内部结构，与临时的局部变量一个层次<br>会像一个局部的变量一样，不能用public protected private以及static<br>只能用abstract或final<br>局部内部类命名规则 Demo$1InnerMethod Demo$2InnerMethod (用数字区分两个重名的)<br>局部内部类使用的变量只能是final修饰的，java8默认自带final <a href="https://juejin.im/post/5bc5f8bae51d450e482c445d" target="_blank" rel="noopener">深入理解局部内部类访问局部变量为什么必须加final关键字</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Demo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String s= <span class="string">"abc"</span>;</span><br><span class="line">        <span class="comment">//在方法里定义一个局部内部类</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">InnerDemo</span>()</span>&#123;</span><br><span class="line">            <span class="comment">//局部内部类使用的局部变量都需要加final修饰</span></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -373,12 +376,12 @@
 </li>
 </ol>
 <ol start="3">
-<li><p>匿名内部类<br>成员匿名内部类<br>局部匿名内部类</p>
+<li><h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>成员匿名内部类<br>局部匿名内部类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Test</span></span>&#123;<span class="comment">//定义一个普通接口</span></span><br><span class="line"> 		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//可以直接创建,不需要再用一个具体的子类</span></span><br><span class="line">Test t = <span class="keyword">new</span> Test()&#123;   <span class="comment">//假如没有这个方括号里面的内容，接口不能直接创建</span></span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通常接口或抽象类的具体子类这样写，因为开发中可以省略一个类文件<br>匿名内部类只有类的体，没有类的所有结构（<strong>修饰符 名字 继承 实现</strong>）<br>所以不能用任何修饰符来修饰 匿名内部类也没有<strong>构造方法</strong><br>应用：Swing 做一个按钮 绑定一个事件监听器</p>
 </li>
-<li><p>静态内部类<br>成员静态内部类<br>不需要外部类对象创建了，通过正常的方式直接创建内部类（但同样要导包）<br>普通的成员内部类  InnerDemo             a = outer.new InnerDemo();<br>静态的成员内部类  InnerDemoStatic    a = new.InnerDemoStatic();  (少了外部类对象.)</p>
+<li><h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><p>成员静态内部类<br>不需要外部类对象创建了，通过正常的方式直接创建内部类（但同样要导包）<br>普通的成员内部类  InnerDemo             a = outer.new InnerDemo();<br>静态的成员内部类  InnerDemoStatic    a = new.InnerDemoStatic();  (<strong>少了外部类对象</strong>.)</p>
 <p>静态元素不能访问非静态成员（自己类跟外部类） </p>
 </li>
 </ol>
@@ -537,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#策略模式Strategy—-行为型模式"><span class="nav-number">1.</span> <span class="nav-text">策略模式Strategy—-行为型模式</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#内部类"><span class="nav-number"></span> <span class="nav-text">内部类</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式Strategy—-行为型模式"><span class="nav-number">1.</span> <span class="nav-text">策略模式Strategy—-行为型模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类"><span class="nav-number">2.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员内部类"><span class="nav-number">2.2.</span> <span class="nav-text">成员内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部内部类（不常用）"><span class="nav-number">2.3.</span> <span class="nav-text">局部内部类（不常用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名内部类"><span class="nav-number">2.4.</span> <span class="nav-text">匿名内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态内部类"><span class="nav-number">2.5.</span> <span class="nav-text">静态内部类</span></a></li></ol></li></ol></div>
             
 
           </div>
