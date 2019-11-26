@@ -87,8 +87,7 @@
 <meta property="og:description" content="权限修饰符权限修饰符可以用来修饰 类本身 和类中的成员（除了程序块）">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/static.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/25/images/static.png">
-<meta property="og:updated_time" content="2019-11-26T11:03:32.636Z">
+<meta property="og:updated_time" content="2019-11-26T15:59:30.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修饰符">
 <meta name="twitter:description" content="权限修饰符权限修饰符可以用来修饰 类本身 和类中的成员（除了程序块）">
@@ -431,7 +430,7 @@
 <ul>
 <li><h3 id="修饰方法"><a href="#修饰方法" class="headerlink" title="修饰方法"></a>修饰方法</h3></li>
 </ul>
-<p>方法是最终的方法，**不可以被子类方法重写（覆盖）</p>
+<p>方法是最终的方法，<strong>不可以被子类方法重写（覆盖）</strong></p>
 <ul>
 <li><h3 id="修饰类本身"><a href="#修饰类本身" class="headerlink" title="修饰类本身"></a>修饰类本身</h3></li>
 </ul>
@@ -448,16 +447,24 @@
 </ul>
 </li>
 <li><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
-<li>静态元素在类加载时就初始化了</li>
-<li>静态元素存储在静态元素区，每个类有自己的区域，与其他类不冲突</li>
-<li>静态元素值加载一次</li>
-<li>可以直接通过类名字访问，不用创建对象</li>
+<li><p>静态元素在类加载时就初始化了</p>
+</li>
+<li><p>静态元素存储在静态元素区，每个类有自己的区域，与其他类不冲突</p>
+</li>
+<li><p>静态元素值只加载一次</p>
+</li>
+<li><p>可以直接通过类名字访问，不需要创建对象</p>
+</li>
+<li><p>静态元素区Garbage Collection无法管理，可以粗暴的认为常驻内存</p>
+</li>
+<li><p>非静态成员（堆内存里）可以访问静态成员（静态区），反之不行</p>
+</li>
 </ul>
 </li>
 </ol>
-<img src="/images/static.png" width="50%">
+<img src="/images/static.png">
 
-<img src="../images/static.png" width="50%">
+
       
     </div>
     
