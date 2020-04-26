@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要是二叉树的非递归遍历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的三种遍历方式">
+<meta property="og:url" content="http://yoursite.com/2019/12/01/二叉树遍历/index.html">
+<meta property="og:site_name" content="零零发">
+<meta property="og:description" content="主要是二叉树的非递归遍历">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://files.cnblogs.com/files/songwenjie/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%862.gif">
+<meta property="og:updated_time" content="2019-12-01T09:58:25.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树的三种遍历方式">
+<meta name="twitter:description" content="主要是二叉树的非递归遍历">
+<meta name="twitter:image" content="https://files.cnblogs.com/files/songwenjie/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%862.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/01/二叉树遍历/">
+
+
+
+
+
+  <title>二叉树的三种遍历方式 | 零零发</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">零零发</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/二叉树遍历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="零零发">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="零零发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二叉树的三种遍历方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T17:18:28+08:00">
+                2019-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要是二叉树的非递归遍历</p>
+<a id="more"></a>
+
+<p><a href="https://www.cnblogs.com/songwenjie/p/8955856.html#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86" target="_blank" rel="noopener">网上的大神图解数据结构的文章，包含所有的方式遍历</a></p>
+<h1 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h1><h2 id="非递归方式："><a href="#非递归方式：" class="headerlink" title="非递归方式："></a>非递归方式：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;   </span><br><span class="line">  Stack S;</span><br><span class="line">  InitStack(S); <span class="comment">//初始化栈</span></span><br><span class="line">  BiTree p=T;</span><br><span class="line">  Push(S,p);<span class="comment">//先将最顶上的根节点入栈</span></span><br><span class="line">  <span class="keyword">while</span>(StackEmpty(S)!=TRUE)&#123;</span><br><span class="line">  visit (p-&gt;data);         <span class="comment">//访问根节点</span></span><br><span class="line">  <span class="keyword">if</span>(p-&gt;rchild) Push(S,p-&gt;rchild); <span class="comment">//存右子树</span></span><br><span class="line">  <span class="keyword">if</span>(p-&gt;lchild) Push(S,p-&gt;lchild); <span class="comment">//存左子树   </span></span><br><span class="line">  Pop (S,p);         <span class="comment">//弹出栈顶节点，并赋值给p指针,重新循环</span></span><br><span class="line"> </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h1><h2 id="非递归方式"><a href="#非递归方式" class="headerlink" title="非递归方式"></a>非递归方式</h2><blockquote>
+<p>后序遍历，跟中序遍历相比，主要是要思考如何判断右子树是否已经被遍历完</p>
+<p>(1)可以借用栈元素标记（同时存入指针跟一个标签），标签可以用来判断右子树是否被处理完</p>
+<p>(2)可以借用指针，一直指向最近刚访问完的那个节点</p>
+</blockquote>
+<h3 id="借用栈元素标记："><a href="#借用栈元素标记：" class="headerlink" title="借用栈元素标记："></a>借用栈元素标记：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">【题目】试利用栈及其基本操作写出二叉树T的非递归</span><br><span class="line">的后序遍历算法(提示：为分辨后序遍历时两次进栈的</span><br><span class="line">不同返回点，需在指针进栈时同时将一个标志进栈）。</span><br><span class="line">二叉链表类型定义：</span><br><span class="line"><span class="keyword">typedef</span> struct BiTNode &#123;</span><br><span class="line">  TElemType  data;</span><br><span class="line">  struct BiTNode  *lchild,*rchild;</span><br><span class="line">&#125; BiTNode, *BiTree;</span><br><span class="line">可用栈类型Stack的相关定义：</span><br><span class="line"><span class="keyword">typedef</span> struct &#123;</span><br><span class="line">  struct BiTNode *ptr; <span class="comment">// 二叉树结点的指针类型</span></span><br><span class="line">  <span class="keyword">int</span>      tag; <span class="comment">// 0..1</span></span><br><span class="line">&#125; SElemType;    <span class="comment">// 栈的元素类型</span></span><br><span class="line">Status InitStack(Stack &amp;S); </span><br><span class="line">Status StackEmpty(Stack S); </span><br><span class="line">Status Push(Stack &amp;S, SElemType e);</span><br><span class="line">Status Pop(Stack &amp;S, SElemType &amp;e); </span><br><span class="line">Status GetTop(Stack S, SElemType &amp;e); </span><br><span class="line">**********/</span><br><span class="line"><span class="keyword">void</span> PostOrder(BiTree T, <span class="keyword">void</span> (*visit)(TElemType))</span><br><span class="line"><span class="comment">/* 使用栈，非递归后序遍历二叉树T，     */</span></span><br><span class="line"><span class="comment">/* 对每个结点的元素域data调用函数visit */</span></span><br><span class="line">&#123;    Stack S;</span><br><span class="line">      SElemType e;</span><br><span class="line">      InitStack(S);</span><br><span class="line">  <span class="keyword">while</span>(!StackEmpty(S) || T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">      <span class="keyword">while</span>(T != <span class="literal">NULL</span>)&#123;<span class="comment">//先将沿途的左子树节点全部入栈</span></span><br><span class="line">           e.ptr = T;   <span class="comment">//确保T指针没有左子树了</span></span><br><span class="line">           e.tag = <span class="number">0</span>;</span><br><span class="line">           Push(S,e);</span><br><span class="line">           T = T-&gt;lchild;</span><br><span class="line">       &#125;</span><br><span class="line">      Pop(S,e);        <span class="comment">//将栈顶出栈</span></span><br><span class="line">      T = e.ptr;</span><br><span class="line">      <span class="keyword">if</span>(e.tag == <span class="number">0</span> &amp;&amp; T -&gt; rchild != <span class="literal">NULL</span>)&#123; <span class="comment">//假如存在右子树且没还被访问过</span></span><br><span class="line">          e.tag = <span class="number">1</span>;    <span class="comment">//1 代表这个节点的右子树即将被全部访问了</span></span><br><span class="line">          Push(S,e);    <span class="comment">//同个节点二次入栈，重新进行一遍while循环</span></span><br><span class="line">          T = T -&gt; rchild;</span><br><span class="line">            &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(e.tag == <span class="number">1</span> || T -&gt; rchild == <span class="literal">NULL</span>)&#123; <span class="comment">//不存在右子树或者其已经被访问了</span></span><br><span class="line">         visit(T-&gt;data); <span class="comment">//同时满足T不存在左子树，且右子树已经处理完毕</span></span><br><span class="line">          T = <span class="literal">NULL</span>; <span class="comment">//因为访问完往回走了，不必进行while循环存左子树</span></span><br><span class="line">           &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="comment">//1.先找到最左下的结点，并将沿途结点指针入栈</span></span><br><span class="line">   <span class="comment">//2.弹出栈顶元素，看看其需不需要处理右子树</span></span><br><span class="line">   <span class="comment">//    若需要处理右子树：先将栈顶元素标签改为1，</span></span><br><span class="line">   <span class="comment">//    1代表存在右子树，而且后面这颗右子树会被处理完（进行一遍1步骤）</span></span><br><span class="line">   <span class="comment">//    若不需要处理：则可以进行访问</span></span><br><span class="line">    </span><br><span class="line">   <span class="comment">// 重复进行以上步骤，直至栈里面的元素为空</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="借用指针标记："><a href="#借用指针标记：" class="headerlink" title="借用指针标记："></a>借用指针标记：</h3><blockquote>
+<p>申请一个栈stack，将头节点压入stack，同时设置两个变量 temp 和 c，在整个流程中，temp代表最近一次弹出并打印的节点，c代表当前stack的栈顶节点，初始时令temp为头节点，，c为null；</p>
+<p>每次令c等于当前stack的栈顶节点，但是不从stack中弹出节点，此时分一下三种情况：</p>
+<p>(1)如果c的左孩子不为空，并且temp不等于c的左孩子，也不等于c的右孩子，则吧c的左孩子压入stack中</p>
+<p>(2)如果情况1不成立，并且c的右孩子不为空，并且temp不等于c的右孩子，则把c的右孩子压入stack中；</p>
+<p>(3)如果情况1和2不成立，则从stack中弹出c并打印，然后令temp等于c；</p>
+<p>一直重复步骤2，直到stack为空.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//具体过程：</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PosOrderTwo</span><span class="params">(TreeNode&lt;<span class="keyword">char</span>&gt; treeNode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Stack&lt;TreeNode&lt;<span class="keyword">char</span>&gt;&gt; stack = <span class="keyword">new</span> Stack&lt;TreeNode&lt;<span class="keyword">char</span>&gt;&gt;();</span><br><span class="line">    stack.Push(treeNode);</span><br><span class="line"></span><br><span class="line">    TreeNode&lt;<span class="keyword">char</span>&gt; temp = treeNode;</span><br><span class="line">    TreeNode&lt;<span class="keyword">char</span>&gt; c = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (!(stack.Count == <span class="number">0</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        c = stack.Peek();<span class="comment">//获取栈顶元素</span></span><br><span class="line">        <span class="comment">//c结点有左孩子 并且 左孩子没被遍历（输出）过 并且 右孩子没被遍历过</span></span><br><span class="line">        <span class="keyword">if</span> (c.LChild != <span class="keyword">null</span> &amp;&amp; temp != c.LChild &amp;&amp; temp != c.RChild)</span><br><span class="line">            stack.Push(c.LChild);</span><br><span class="line">        <span class="comment">//c结点有右孩子 并且 右孩子没被遍历（输出）过</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (c.RChild != <span class="keyword">null</span> &amp;&amp; temp != c.RChild)</span><br><span class="line">            stack.Push(c.RChild);</span><br><span class="line">        <span class="comment">//c结点没有孩子结点 或者 孩子结点已经被遍历（输出）过</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            TreeNode&lt;<span class="keyword">char</span>&gt; node = stack.Pop();</span><br><span class="line">            Console.WriteLine(node.Data); <span class="comment">//访问节点</span></span><br><span class="line">            temp = c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://files.cnblogs.com/files/songwenjie/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%862.gif" alt="借用指针标记"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/27/包装类+数学相关类/" rel="next" title="包装类+数学相关类">
+                <i class="fa fa-chevron-left"></i> 包装类+数学相关类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">零零发</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#先序遍历"><span class="nav-number">1.</span> <span class="nav-text">先序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归方式："><span class="nav-number">1.1.</span> <span class="nav-text">非递归方式：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后序遍历"><span class="nav-number">2.</span> <span class="nav-text">后序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归方式"><span class="nav-number">2.1.</span> <span class="nav-text">非递归方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#借用栈元素标记："><span class="nav-number">2.1.1.</span> <span class="nav-text">借用栈元素标记：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#借用指针标记："><span class="nav-number">2.1.2.</span> <span class="nav-text">借用指针标记：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">零零发</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

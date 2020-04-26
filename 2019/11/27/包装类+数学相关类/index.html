@@ -81,15 +81,15 @@
 
 <meta name="description" content="讲述包装类的使用，以及包装类在笔试中常出现的问题，== 和 equal的区别，Integer类加载的过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="包装类">
-<meta property="og:url" content="http://yoursite.com/2019/11/27/包装类/index.html">
+<meta property="og:title" content="包装类+数学相关类">
+<meta property="og:url" content="http://yoursite.com/2019/11/27/包装类+数学相关类/index.html">
 <meta property="og:site_name" content="零零发">
 <meta property="og:description" content="讲述包装类的使用，以及包装类在笔试中常出现的问题，== 和 equal的区别，Integer类加载的过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/Integer.png">
-<meta property="og:updated_time" content="2019-11-27T16:15:42.553Z">
+<meta property="og:updated_time" content="2020-01-23T03:11:23.876Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="包装类">
+<meta name="twitter:title" content="包装类+数学相关类">
 <meta name="twitter:description" content="讲述包装类的使用，以及包装类在笔试中常出现的问题，== 和 equal的区别，Integer类加载的过程。">
 <meta name="twitter:image" content="http://yoursite.com/images/Integer.png">
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/27/包装类/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/27/包装类+数学相关类/">
 
 
 
 
 
-  <title>包装类 | 零零发</title>
+  <title>包装类+数学相关类 | 零零发</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/包装类/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/包装类+数学相关类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="零零发">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">包装类</h1>
+          <h1 class="post-title" itemprop="name headline">包装类+数学相关类</h1>
         
 
         <div class="post-meta">
@@ -375,7 +375,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="keyword">new</span> Interger(<span class="number">10</span>);<span class="comment">//数据类型转化为包装类</span></span><br><span class="line"><span class="keyword">int</span> value = i1.intValue();    <span class="comment">//包装类型转化为基本类型（拆包）</span></span><br><span class="line"><span class="comment">//新方法是直接使用 “ = ”，自动调用</span></span><br><span class="line">integer i2 = <span class="number">10</span>； <span class="comment">//将10常量自动的包装成包装类（在底层实现）</span></span><br><span class="line"><span class="keyword">int</span> value = <span class="keyword">new</span> Integer(<span class="number">10</span>); <span class="comment">//自动拆包，调用intValue方法，将结果返回</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> value = Integer.parselnt(<span class="string">"123"</span>)<span class="comment">//将字符串类型直接转化为int类型</span></span><br><span class="line"><span class="keyword">int</span> value = <span class="keyword">new</span> Integer(<span class="string">"123"</span>)   <span class="comment">//先构建成integer对象，再将其拆包</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>笔试中出现的问题 </p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="number">10</span>; <span class="comment">//10被自动包装成 Integer 对象， 存储在Integer类对应的静态元素区</span></span><br><span class="line">Integer i1 = <span class="number">10</span>;</span><br><span class="line">Integer i1 = <span class="keyword">new</span> Integer(<span class="number">10</span>);<span class="comment">//new出来的对象，里边存储着 10 这个属性。</span></span><br><span class="line">Integer i1 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">System.out.println(i1 == i2);<span class="comment">//true  //若数字范围超过了127 则是false</span></span><br><span class="line">System.out.println(i1 == i3); <span class="comment">//false</span></span><br><span class="line">System.out.println(i3 == i4);<span class="comment">//false</span></span><br><span class="line">System.out.println(i1.equals(i2));<span class="comment">//true</span></span><br><span class="line">System.out.println(i1.equals(i3));<span class="comment">//true</span></span><br><span class="line">System.out.println(i3.equals(i4));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="number">10</span>; <span class="comment">//10被自动包装成 Integer 对象， 存储在Integer类对应的静态元素区</span></span><br><span class="line">Integer i2 = <span class="number">10</span>;</span><br><span class="line">Integer i3 = <span class="keyword">new</span> Integer(<span class="number">10</span>);<span class="comment">//new出来的对象，里边存储着 10 这个属性。</span></span><br><span class="line">Integer i4 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">System.out.println(i1 == i2);<span class="comment">//true  //若数字范围超过了127 则是false</span></span><br><span class="line">System.out.println(i1 == i3); <span class="comment">//false</span></span><br><span class="line">System.out.println(i3 == i4);<span class="comment">//false</span></span><br><span class="line">System.out.println(i1.equals(i2));<span class="comment">//true</span></span><br><span class="line">System.out.println(i1.equals(i3));<span class="comment">//true</span></span><br><span class="line">System.out.println(i3.equals(i4));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>==与equals()区别</p>
 <blockquote>
@@ -396,6 +396,46 @@
 </li>
 </ol>
 <img src="/images/Integer.png">
+
+<h1 id="与数学相关的类"><a href="#与数学相关的类" class="headerlink" title="与数学相关的类"></a>与数学相关的类</h1><h2 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h2><ol>
+<li><p>所属的包java.lang</p>
+</li>
+<li><p>Math构造方法是私有的，提供的属性及方法都是static，我们不能创建也不必创建对象</p>
+</li>
+<li><blockquote>
+<p>abs () 返回给定数字的绝对值</p>
+<p>double = ceil () 向上取整</p>
+<p>double = floor () 向下取整</p>
+<p>double = rint () 临近的整数(距离相同，偶数优先)</p>
+<p>int = round () 四舍五入的整数</p>
+<p>max(a,b) min(a,b) pow(a,b)</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>随机产生一个 [0.0-1.0)</p>
+<p>double = random() </p>
+<p>0-9之间的随机整数</p>
+<p>int value = (int)(Math.random()*10)</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="Ramdom类"><a href="#Ramdom类" class="headerlink" title="Ramdom类"></a>Ramdom类</h2><ol>
+<li><p>在java.util包中的类，需要import导入</p>
+</li>
+<li><p>没有任何继承关系 默认继承Object类</p>
+</li>
+<li><blockquote>
+<p>Random r = new Random();//需要创建对象</p>
+<p>r.nextInt();随机产生int取值范围内的整数 有正有负</p>
+<p>r.nextInt(int bound) 随机产生一个[0,bound) 整数</p>
+<p>​                     注意bound必须为整数，</p>
+<p>​                    否则IllegalArgumentException</p>
+<p>r.nextFloat() 随机产生一个[0.0-1.0)</p>
+<p>r.nextBoolean() 随机产生一个boolean值 </p>
+</blockquote>
+</li>
+</ol>
+
       
     </div>
     
@@ -428,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/二叉树遍历/" rel="prev" title="二叉树的三种遍历方式">
+                二叉树的三种遍历方式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -504,7 +548,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -515,7 +559,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -550,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类（封装类）"><span class="nav-number">1.</span> <span class="nav-text">包装类（封装类）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类（封装类）"><span class="nav-number">1.</span> <span class="nav-text">包装类（封装类）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与数学相关的类"><span class="nav-number">2.</span> <span class="nav-text">与数学相关的类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math类"><span class="nav-number">2.1.</span> <span class="nav-text">Math类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ramdom类"><span class="nav-number">2.2.</span> <span class="nav-text">Ramdom类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -570,7 +614,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
